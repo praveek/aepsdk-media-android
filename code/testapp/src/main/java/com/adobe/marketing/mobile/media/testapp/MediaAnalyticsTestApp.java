@@ -15,7 +15,7 @@
  * from Adobe.
  **************************************************************************/
 
-package com.adobe.mediaanalyticstestapp;
+package com.adobe.marketing.mobile.media.testapp;
 
 import android.app.Application;
 
@@ -26,10 +26,8 @@ import com.adobe.marketing.mobile.Identity;
 import com.adobe.marketing.mobile.Media;
 import com.adobe.marketing.mobile.MobileCore;
 import com.adobe.marketing.mobile.LoggingMode;
-import com.adobe.marketing.mobile.VisitorID;
 
 import java.util.Arrays;
-import java.util.HashMap;
 
 public class MediaAnalyticsTestApp extends Application {
 	//Insert Launch App id

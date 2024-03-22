@@ -15,7 +15,7 @@
  * from Adobe.
  **************************************************************************/
 
-package com.adobe.mediaanalyticstestapp.player;
+package com.adobe.marketing.mobile.media.testapp.player;
 
 import android.app.Activity;
 import android.media.MediaPlayer;
@@ -33,8 +33,8 @@ import java.util.Map;
 import java.util.Observable;
 
 import com.adobe.marketing.mobile.MediaConstants;
-import com.adobe.mediaanalyticstestapp.Configuration;
-import com.adobe.mediaanalyticstestapp.R;
+import com.adobe.marketing.mobile.media.testapp.Configuration;
+import com.adobe.marketing.mobile.media.testapp.R;
 
 public class VideoPlayer extends Observable {
 	private static final String LOG_TAG = "[Sample]::VideoPlayer";

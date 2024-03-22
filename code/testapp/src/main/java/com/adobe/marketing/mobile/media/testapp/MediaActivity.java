@@ -14,16 +14,16 @@
 // * is strictly forbidden unless prior written permission is obtained
 // * from Adobe.
 // **************************************************************************/
-package com.adobe.mediaanalyticstestapp;
+package com.adobe.marketing.mobile.media.testapp;
 
 import android.os.Bundle;
 import android.app.Activity;
 import android.net.Uri;
 import android.view.View;
 
-import com.adobe.mediaanalyticstestapp.analytics.VideoAnalyticsProvider;
-import com.adobe.mediaanalyticstestapp.player.PlayerEvent;
-import com.adobe.mediaanalyticstestapp.player.VideoPlayer;
+import com.adobe.marketing.mobile.media.testapp.player.PlayerEvent;
+import com.adobe.marketing.mobile.media.testapp.analytics.VideoAnalyticsProvider;
+import com.adobe.marketing.mobile.media.testapp.player.VideoPlayer;
 
 import java.util.Observable;
 import java.util.Observer;

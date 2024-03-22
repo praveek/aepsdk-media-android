@@ -15,14 +15,15 @@
  * from Adobe.
  **************************************************************************/
 
-package com.adobe.mediaanalyticstestapp.analytics;
+package com.adobe.marketing.mobile.media.testapp.analytics;
 
 import android.util.Log;
 import com.adobe.marketing.mobile.Media;
 import com.adobe.marketing.mobile.MediaConstants;
 import com.adobe.marketing.mobile.MediaTracker;
-import com.adobe.mediaanalyticstestapp.Configuration;
-import com.adobe.mediaanalyticstestapp.player.*;
+import com.adobe.marketing.mobile.media.testapp.Configuration;
+import com.adobe.marketing.mobile.media.testapp.player.PlayerEvent;
+import com.adobe.marketing.mobile.media.testapp.player.VideoPlayer;
 
 import java.util.*;
 

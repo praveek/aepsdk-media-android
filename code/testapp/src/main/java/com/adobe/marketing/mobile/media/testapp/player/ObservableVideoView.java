@@ -15,7 +15,7 @@
  * from Adobe.
  **************************************************************************/
 
-package com.adobe.mediaanalyticstestapp.player;
+package com.adobe.marketing.mobile.media.testapp.player;
 
 import android.content.Context;
 import android.util.AttributeSet;

@@ -14,7 +14,7 @@
  * is strictly forbidden unless prior written permission is obtained
  * from Adobe.
  **************************************************************************/
-package com.adobe.mediaanalyticstestapp;
+package com.adobe.marketing.mobile.media.testapp;
 
 import com.adobe.marketing.mobile.Assurance;
 
