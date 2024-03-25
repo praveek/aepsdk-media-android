@@ -34,14 +34,14 @@ public static final Class<? extends Extension> EXTENSION = MediaExtension.class;
 
 ##### Java
 ```java
-MobileCore.registerExtensions(Arrays.asList(Assurance.EXTENSION, ...), new AdobeCallback<Object>() {
+MobileCore.registerExtensions(Arrays.asList(Media.EXTENSION, ...), new AdobeCallback<Object>() {
     // implement completion callback
 });
 ```
 
 ##### Kotlin
 ```kotlin
-MobileCore.registerExtensions(listOf(Assurance.EXTENSION, ...)){
+MobileCore.registerExtensions(listOf(Media.EXTENSION, ...)){
     // implement completion callback
 }
 ```

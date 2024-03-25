@@ -23,11 +23,11 @@ Media extension depends on the following extensions:
     ### Groovy
     
     ```groovy
-    implementation platform("com.adobe.marketing.mobile:sdk-bom:3.+")
-    implementation "com.adobe.marketing.mobile:core"
-    implementation "com.adobe.marketing.mobile:identity"
-    implementation "com.adobe.marketing.mobile:analytics"
-    implementation "com.adobe.marketing.mobile:media"
+    implementation platform('com.adobe.marketing.mobile:sdk-bom:3.+')
+    implementation 'com.adobe.marketing.mobile:core'
+    implementation 'com.adobe.marketing.mobile:identity'
+    implementation 'com.adobe.marketing.mobile:analytics'
+    implementation 'com.adobe.marketing.mobile:media'
     ```
 
 > **Warning**  
