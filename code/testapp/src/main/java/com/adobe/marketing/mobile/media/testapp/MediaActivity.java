@@ -1,35 +1,28 @@
-///*************************************************************************
-// * ADOBE CONFIDENTIAL
-// * ___________________
-// *
-// * Copyright 2021 Adobe
-// * All Rights Reserved.
-// *
-// * NOTICE: All information contained herein is, and remains
-// * the property of Adobe and its suppliers, if any. The intellectual
-// * and technical concepts contained herein are proprietary to Adobe
-// * and its suppliers and are protected by all applicable intellectual
-// * property laws, including trade secret and copyright laws.
-// * Dissemination of this information or reproduction of this material
-// * is strictly forbidden unless prior written permission is obtained
-// * from Adobe.
-// **************************************************************************/
+/*
+  Copyright 2021 Adobe. All rights reserved.
+  This file is licensed to you under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License. You may obtain a copy
+  of the License at http://www.apache.org/licenses/LICENSE-2.0
+  Unless required by applicable law or agreed to in writing, software distributed under
+  the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+  OF ANY KIND, either express or implied. See the License for the specific language
+  governing permissions and limitations under the License.
+*/
+
 package com.adobe.marketing.mobile.media.testapp;
 
-import android.os.Bundle;
 import android.app.Activity;
 import android.net.Uri;
+import android.os.Bundle;
 import android.view.View;
-
-import com.adobe.marketing.mobile.media.testapp.player.PlayerEvent;
 import com.adobe.marketing.mobile.media.testapp.analytics.VideoAnalyticsProvider;
+import com.adobe.marketing.mobile.media.testapp.player.PlayerEvent;
 import com.adobe.marketing.mobile.media.testapp.player.VideoPlayer;
-
 import java.util.Observable;
 import java.util.Observer;
 
-
 public class MediaActivity extends Activity implements Observer {
+
 	private VideoPlayer _player;
 	private VideoAnalyticsProvider _analyticsProvider;
 
@@ -69,11 +62,9 @@ public class MediaActivity extends Activity implements Observer {
 			case AD_START:
 				_onEnterAd();
 				break;
-
 			case AD_COMPLETE:
 				_onExitAd();
 				break;
-
 			case SEEK_COMPLETE:
 				if (_player.getAdInfo() == null) {
 					// The user seeked outside the ad.
@@ -85,20 +76,24 @@ public class MediaActivity extends Activity implements Observer {
 	}
 
 	private void _onEnterAd() {
-		runOnUiThread(new Runnable() {
-			@Override
-			public void run() {
-				findViewById(R.id.adOverlayView).setVisibility(View.VISIBLE);
+		runOnUiThread(
+			new Runnable() {
+				@Override
+				public void run() {
+					findViewById(R.id.adOverlayView).setVisibility(View.VISIBLE);
+				}
 			}
-		});
+		);
 	}
 
 	private void _onExitAd() {
-		runOnUiThread(new Runnable() {
-			@Override
-			public void run() {
-				findViewById(R.id.adOverlayView).setVisibility(View.INVISIBLE);
+		runOnUiThread(
+			new Runnable() {
+				@Override
+				public void run() {
+					findViewById(R.id.adOverlayView).setVisibility(View.INVISIBLE);
+				}
 			}
-		});
+		);
 	}
 }

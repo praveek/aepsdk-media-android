@@ -1,23 +1,19 @@
-/*************************************************************************
- * ADOBE CONFIDENTIAL
- * ___________________
- *
- * Copyright 2018 Adobe
- * All Rights Reserved.
- *
- * NOTICE: All information contained herein is, and remains
- * the property of Adobe and its suppliers, if any. The intellectual
- * and technical concepts contained herein are proprietary to Adobe
- * and its suppliers and are protected by all applicable intellectual
- * property laws, including trade secret and copyright laws.
- * Dissemination of this information or reproduction of this material
- * is strictly forbidden unless prior written permission is obtained
- * from Adobe.
- **************************************************************************/
+/*
+  Copyright 2018 Adobe. All rights reserved.
+  This file is licensed to you under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License. You may obtain a copy
+  of the License at http://www.apache.org/licenses/LICENSE-2.0
+  Unless required by applicable law or agreed to in writing, software distributed under
+  the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+  OF ANY KIND, either express or implied. See the License for the specific language
+  governing permissions and limitations under the License.
+*/
 
 package com.adobe.marketing.mobile.media.testapp.player;
 
 import android.app.Activity;
+import android.content.Context;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Handler;
@@ -25,18 +21,15 @@ import android.os.HandlerThread;
 import android.os.Looper;
 import android.util.Log;
 import android.widget.MediaController;
-import android.media.AudioManager;
-import android.content.Context;
-
+import com.adobe.marketing.mobile.MediaConstants;
+import com.adobe.marketing.mobile.media.testapp.Configuration;
+import com.adobe.marketing.mobile.media.testapp.R;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Observable;
 
-import com.adobe.marketing.mobile.MediaConstants;
-import com.adobe.marketing.mobile.media.testapp.Configuration;
-import com.adobe.marketing.mobile.media.testapp.R;
-
 public class VideoPlayer extends Observable {
+
 	private static final String LOG_TAG = "[Sample]::VideoPlayer";
 
 	// This sample VideoPlayer simulates a mid-roll ad at time 15:
@@ -73,7 +66,6 @@ public class VideoPlayer extends Observable {
 	private final String _streamType;
 
 	public VideoPlayer(Activity parentActivity) {
-
 		_audio = (AudioManager) parentActivity.getSystemService(Context.AUDIO_SERVICE);
 
 		_videoView = (ObservableVideoView) parentActivity.findViewById(R.id.videoView);
@@ -188,7 +180,7 @@ public class VideoPlayer extends Observable {
 	}
 
 	private Double getPlayhead() {
-		return (double)(_videoView.getCurrentPosition() / 1000);
+		return (double) (_videoView.getCurrentPosition() / 1000);
 	}
 
 	@SuppressWarnings("FieldCanBeLocal")
@@ -205,7 +197,6 @@ public class VideoPlayer extends Observable {
 					notifyObservers(PlayerEvent.BUFFER_START);
 
 					break;
-
 				case MediaPlayer.MEDIA_INFO_BUFFERING_END:
 					Log.d(LOG_TAG, "#onInfo(what=MEDIA_INFO_BUFFERING_END, extra=" + extra + ")");
 
@@ -215,7 +206,6 @@ public class VideoPlayer extends Observable {
 					notifyObservers(PlayerEvent.BUFFER_COMPLETE);
 
 					break;
-
 				default:
 					Log.d(LOG_TAG, "#onInfo(what=" + what + ", extra=" + extra + ")");
 					break;
@@ -233,19 +223,21 @@ public class VideoPlayer extends Observable {
 
 			_mediaController.show(0);
 
-			mediaPlayer.setOnSeekCompleteListener(new MediaPlayer.OnSeekCompleteListener() {
-				@Override
-				public void onSeekComplete(MediaPlayer mediaPlayer) {
-					Log.d(LOG_TAG, "#onSeekComplete()");
+			mediaPlayer.setOnSeekCompleteListener(
+				new MediaPlayer.OnSeekCompleteListener() {
+					@Override
+					public void onSeekComplete(MediaPlayer mediaPlayer) {
+						Log.d(LOG_TAG, "#onSeekComplete()");
 
-					_seeking = false;
+						_seeking = false;
 
-					_doPostSeekComputations();
+						_doPostSeekComputations();
 
-					setChanged();
-					notifyObservers(PlayerEvent.SEEK_COMPLETE);
+						setChanged();
+						notifyObservers(PlayerEvent.SEEK_COMPLETE);
+					}
 				}
-			});
+			);
 		}
 	};
 
@@ -305,7 +297,6 @@ public class VideoPlayer extends Observable {
 	}
 
 	private void _startVideo() {
-
 		_videoLoaded = true;
 
 		setChanged();
@@ -379,7 +370,7 @@ public class VideoPlayer extends Observable {
 		// Seek inside the first chapter.
 		if (vTime < CHAPTER1_END_POS) {
 			// If we were not inside the first chapter before, trigger a chapter start
-			if (_chapterInfo == null || (Long)_chapterInfo.get("position") != 1) {
+			if (_chapterInfo == null || (Long) _chapterInfo.get("position") != 1) {
 				_startChapter1();
 
 				// If we were in the ad, clear the ad and ad-break info, but don't send the AD_COMPLETE event.
@@ -389,7 +380,6 @@ public class VideoPlayer extends Observable {
 				}
 			}
 		}
-
 		// Seek inside the ad.
 		else if (vTime >= AD_START_POS && vTime < AD_END_POS) {
 			// If we were not inside the ad before, trigger an ad-start
@@ -400,11 +390,10 @@ public class VideoPlayer extends Observable {
 				_chapterInfo = null;
 			}
 		}
-
 		// Seek inside the second chapter.
 		else {
 			// If we were not inside the 2nd chapter before, trigger a chapter start
-			if (_chapterInfo == null || (Long)_chapterInfo.get("position") != 2) {
+			if (_chapterInfo == null || (Long) _chapterInfo.get("position") != 2) {
 				_startChapter2();
 
 				// If we were in the ad, clear the ad and ad-break info, but don't send the AD_COMPLETE event.
@@ -421,7 +410,7 @@ public class VideoPlayer extends Observable {
 
 		if (_isMute != mute) {
 			_isMute = mute;
-			PlayerEvent state = mute ? PlayerEvent.PLAYER_STATE_MUTE_START : PlayerEvent. PLAYER_STATE_MUTE_END;
+			PlayerEvent state = mute ? PlayerEvent.PLAYER_STATE_MUTE_START : PlayerEvent.PLAYER_STATE_MUTE_END;
 			setChanged();
 			notifyObservers(state);
 		}
@@ -448,7 +437,6 @@ public class VideoPlayer extends Observable {
 				_startAd();
 			}
 		}
-
 		// Otherwise, we're outside the ad content:
 		else {
 			if (_adInfo != null) {
@@ -457,7 +445,7 @@ public class VideoPlayer extends Observable {
 			}
 
 			if (vTime < CHAPTER1_END_POS) {
-				if (_chapterInfo != null && (Long)_chapterInfo.get("position") != 1) {
+				if (_chapterInfo != null && (Long) _chapterInfo.get("position") != 1) {
 					// If we were inside another chapter, complete it.
 					_completeChapter();
 				}
@@ -467,7 +455,7 @@ public class VideoPlayer extends Observable {
 					_startChapter1();
 				}
 			} else {
-				if (_chapterInfo != null && (Long)_chapterInfo.get("position") != 2) {
+				if (_chapterInfo != null && (Long) _chapterInfo.get("position") != 2) {
 					// If we were inside another chapter, complete it.
 					_completeChapter();
 				}
@@ -484,6 +472,7 @@ public class VideoPlayer extends Observable {
 	}
 
 	private class Clock extends HandlerThread {
+
 		private Handler _handler;
 		private Boolean _shouldStop = false;
 
@@ -500,15 +489,17 @@ public class VideoPlayer extends Observable {
 			_handler = new Handler(getLooper());
 			final Handler handler = _handler;
 
-			handler.post(new Runnable() {
-				@Override
-				public void run() {
-					if (!_shouldStop) {
-						_onTick();
-						handler.postDelayed(this, MONITOR_TIMER_INTERVAL);
+			handler.post(
+				new Runnable() {
+					@Override
+					public void run() {
+						if (!_shouldStop) {
+							_onTick();
+							handler.postDelayed(this, MONITOR_TIMER_INTERVAL);
+						}
 					}
 				}
-			});
+			);
 		}
 
 		public void invalidate() {

@@ -1,19 +1,13 @@
-/*************************************************************************
- * ADOBE CONFIDENTIAL
- * ___________________
- *
- * Copyright 2018 Adobe
- * All Rights Reserved.
- *
- * NOTICE: All information contained herein is, and remains
- * the property of Adobe and its suppliers, if any. The intellectual
- * and technical concepts contained herein are proprietary to Adobe
- * and its suppliers and are protected by all applicable intellectual
- * property laws, including trade secret and copyright laws.
- * Dissemination of this information or reproduction of this material
- * is strictly forbidden unless prior written permission is obtained
- * from Adobe.
- **************************************************************************/
+/*
+  Copyright 2018 Adobe. All rights reserved.
+  This file is licensed to you under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License. You may obtain a copy
+  of the License at http://www.apache.org/licenses/LICENSE-2.0
+  Unless required by applicable law or agreed to in writing, software distributed under
+  the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+  OF ANY KIND, either express or implied. See the License for the specific language
+  governing permissions and limitations under the License.
+*/
 
 package com.adobe.marketing.mobile.media.testapp.analytics;
 
@@ -24,10 +18,10 @@ import com.adobe.marketing.mobile.MediaTracker;
 import com.adobe.marketing.mobile.media.testapp.Configuration;
 import com.adobe.marketing.mobile.media.testapp.player.PlayerEvent;
 import com.adobe.marketing.mobile.media.testapp.player.VideoPlayer;
-
 import java.util.*;
 
 public class VideoAnalyticsProvider implements Observer {
+
 	private static final String LOG_TAG = "[Sample]::VideoAnalyticsProvider";
 
 	private VideoPlayer _player;
@@ -75,54 +69,46 @@ public class VideoAnalyticsProvider implements Observer {
 				videoMetadata.put(MediaConstants.VideoMetadataKeys.SHOW, "Sample Show");
 
 				HashMap<String, Object> mediaInfo = Media.createMediaObject(
-														Configuration.VIDEO_NAME,
-														Configuration.VIDEO_ID,
-														Configuration.VIDEO_LENGTH,
-														MediaConstants.StreamType.VOD,
-														Media.MediaType.Video
-													);
+					Configuration.VIDEO_NAME,
+					Configuration.VIDEO_ID,
+					Configuration.VIDEO_LENGTH,
+					MediaConstants.StreamType.VOD,
+					Media.MediaType.Video
+				);
 
 				//Set to true if this is a resume playback scenario (not starting from playhead 0)
 				//mediaInfo.put(MediaConstants.MediaObjectKey.RESUMED, true);
 
 				_tracker.trackSessionStart(mediaInfo, videoMetadata);
 				break;
-
 			case VIDEO_UNLOAD:
 				Log.d(LOG_TAG, "Video unloaded.");
 				_tracker.trackSessionEnd();
 				break;
-
 			case PLAY:
 				Log.d(LOG_TAG, "Playback started.");
 				_tracker.trackPlay();
 				break;
-
 			case PAUSE:
 				Log.d(LOG_TAG, "Playback paused.");
 				_tracker.trackPause();
 				break;
-
 			case SEEK_START:
 				Log.d(LOG_TAG, "Seek started.");
 				_tracker.trackEvent(Media.Event.SeekStart, null, null);
 				break;
-
 			case SEEK_COMPLETE:
 				Log.d(LOG_TAG, "Seek completed.");
 				_tracker.trackEvent(Media.Event.SeekComplete, null, null);
 				break;
-
 			case BUFFER_START:
 				Log.d(LOG_TAG, "Buffer started.");
 				_tracker.trackEvent(Media.Event.BufferStart, null, null);
 				break;
-
 			case BUFFER_COMPLETE:
 				Log.d(LOG_TAG, "Buffer completed.");
 				_tracker.trackEvent(Media.Event.BufferComplete, null, null);
 				break;
-
 			case AD_START:
 				Log.d(LOG_TAG, "Ad started.");
 				HashMap<String, String> adMetadata = new HashMap<String, String>();
@@ -151,13 +137,11 @@ public class VideoAnalyticsProvider implements Observer {
 				_tracker.trackEvent(Media.Event.AdBreakStart, adBreakInfo, null);
 				_tracker.trackEvent(Media.Event.AdStart, adInfo, adMetadata);
 				break;
-
 			case AD_COMPLETE:
 				Log.d(LOG_TAG, "Ad completed.");
 				_tracker.trackEvent(Media.Event.AdComplete, null, null);
 				_tracker.trackEvent(Media.Event.AdBreakComplete, null, null);
 				break;
-
 			case CHAPTER_START:
 				Log.d(LOG_TAG, "Chapter started.");
 				HashMap<String, String> chapterMetadata = new HashMap<String, String>();
@@ -170,40 +154,38 @@ public class VideoAnalyticsProvider implements Observer {
 				Double chapterLength = (Double) chapterData.get("length");
 				Double chapterStartTime = (Double) chapterData.get("startTime");
 
-				HashMap<String, Object> chapterDataInfo = Media.createChapterObject(chapterName, chapterPosition, chapterLength,
-						chapterStartTime);
+				HashMap<String, Object> chapterDataInfo = Media.createChapterObject(
+					chapterName,
+					chapterPosition,
+					chapterLength,
+					chapterStartTime
+				);
 
 				_tracker.trackEvent(Media.Event.ChapterStart, chapterDataInfo, chapterMetadata);
 				break;
-
 			case CHAPTER_COMPLETE:
 				Log.d(LOG_TAG, "Chapter completed.");
 				_tracker.trackEvent(Media.Event.ChapterComplete, null, null);
 				break;
-
 			case COMPLETE:
 				Log.d(LOG_TAG, "Playback completed.");
 
 				_tracker.trackComplete();
 				break;
-
 			case PLAYHEAD_UPDATE:
 				//Log.d(LOG_TAG, "Playhead update.");
 				_tracker.updateCurrentPlayhead(_player.getCurrentPlaybackTime());
 				break;
-
 			case PLAYER_STATE_MUTE_START:
 				Log.d(LOG_TAG, "Player State(Mute).");
-				HashMap<String, Object>stateInfo = Media.createStateObject(MediaConstants.PlayerState.MUTE);
+				HashMap<String, Object> stateInfo = Media.createStateObject(MediaConstants.PlayerState.MUTE);
 				_tracker.trackEvent(Media.Event.StateStart, stateInfo, null);
 				break;
-
 			case PLAYER_STATE_MUTE_END:
 				Log.d(LOG_TAG, "Player State End.");
 				stateInfo = Media.createStateObject(MediaConstants.PlayerState.MUTE);
 				_tracker.trackEvent(Media.Event.StateEnd, stateInfo, null);
 				break;
-
 			default:
 				Log.d(LOG_TAG, "Unhandled player event: " + playerEvent.toString());
 				break;
