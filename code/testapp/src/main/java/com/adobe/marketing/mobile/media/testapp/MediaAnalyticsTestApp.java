@@ -23,18 +23,21 @@ import java.util.Arrays;
 
 public class MediaAnalyticsTestApp extends Application {
 
-	//Insert Launch App id
-	private static final String LAUNCH_ENVIRONMENT_FILE_ID = "";
+    // Insert Launch App id
+    private static final String LAUNCH_ENVIRONMENT_FILE_ID = "";
 
-	@Override
-	public void onCreate() {
-		super.onCreate();
-		MobileCore.setApplication(this);
-		MobileCore.setLogLevel(LoggingMode.VERBOSE);
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        MobileCore.setApplication(this);
+        MobileCore.setLogLevel(LoggingMode.VERBOSE);
 
-		MobileCore.registerExtensions(
-			Arrays.asList(Assurance.EXTENSION, Identity.EXTENSION, Analytics.EXTENSION, Media.EXTENSION),
-			(AdobeCallback) o -> MobileCore.configureWithAppID(LAUNCH_ENVIRONMENT_FILE_ID)
-		);
-	}
+        MobileCore.registerExtensions(
+                Arrays.asList(
+                        Assurance.EXTENSION,
+                        Identity.EXTENSION,
+                        Analytics.EXTENSION,
+                        Media.EXTENSION),
+                (AdobeCallback) o -> MobileCore.configureWithAppID(LAUNCH_ENVIRONMENT_FILE_ID));
+    }
 }

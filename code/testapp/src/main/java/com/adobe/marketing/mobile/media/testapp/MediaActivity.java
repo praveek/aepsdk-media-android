@@ -23,77 +23,75 @@ import java.util.Observer;
 
 public class MediaActivity extends Activity implements Observer {
 
-	private VideoPlayer _player;
-	private VideoAnalyticsProvider _analyticsProvider;
+    private VideoPlayer _player;
+    private VideoAnalyticsProvider _analyticsProvider;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activitymedia);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activitymedia);
 
-		// Create the VideoPlayer instance.
-		_player = new VideoPlayer(this);
+        // Create the VideoPlayer instance.
+        _player = new VideoPlayer(this);
 
-		_player.addObserver(this);
+        _player.addObserver(this);
 
-		// Create the VideoAnalyticsProvider instance and
-		// attach it to the VideoPlayer instance.
-		_analyticsProvider = new VideoAnalyticsProvider(_player);
+        // Create the VideoAnalyticsProvider instance and
+        // attach it to the VideoPlayer instance.
+        _analyticsProvider = new VideoAnalyticsProvider(_player);
 
-		// Load the main video content.
-		Uri uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.video);
-		_player.loadContent(uri);
-	}
+        // Load the main video content.
+        Uri uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.video);
+        _player.loadContent(uri);
+    }
 
-	@Override
-	protected void onDestroy() {
-		_analyticsProvider.destroy();
-		_analyticsProvider = null;
-		_player = null;
+    @Override
+    protected void onDestroy() {
+        _analyticsProvider.destroy();
+        _analyticsProvider = null;
+        _player = null;
 
-		super.onDestroy();
-	}
+        super.onDestroy();
+    }
 
-	@Override
-	public void update(Observable observable, Object o) {
-		PlayerEvent playerEvent = (PlayerEvent) o;
+    @Override
+    public void update(Observable observable, Object o) {
+        PlayerEvent playerEvent = (PlayerEvent) o;
 
-		switch (playerEvent) {
-			case AD_START:
-				_onEnterAd();
-				break;
-			case AD_COMPLETE:
-				_onExitAd();
-				break;
-			case SEEK_COMPLETE:
-				if (_player.getAdInfo() == null) {
-					// The user seeked outside the ad.
-					_onExitAd();
-				}
+        switch (playerEvent) {
+            case AD_START:
+                _onEnterAd();
+                break;
+            case AD_COMPLETE:
+                _onExitAd();
+                break;
+            case SEEK_COMPLETE:
+                if (_player.getAdInfo() == null) {
+                    // The user seeked outside the ad.
+                    _onExitAd();
+                }
 
-				break;
-		}
-	}
+                break;
+        }
+    }
 
-	private void _onEnterAd() {
-		runOnUiThread(
-			new Runnable() {
-				@Override
-				public void run() {
-					findViewById(R.id.adOverlayView).setVisibility(View.VISIBLE);
-				}
-			}
-		);
-	}
+    private void _onEnterAd() {
+        runOnUiThread(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        findViewById(R.id.adOverlayView).setVisibility(View.VISIBLE);
+                    }
+                });
+    }
 
-	private void _onExitAd() {
-		runOnUiThread(
-			new Runnable() {
-				@Override
-				public void run() {
-					findViewById(R.id.adOverlayView).setVisibility(View.INVISIBLE);
-				}
-			}
-		);
-	}
+    private void _onExitAd() {
+        runOnUiThread(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        findViewById(R.id.adOverlayView).setVisibility(View.INVISIBLE);
+                    }
+                });
+    }
 }

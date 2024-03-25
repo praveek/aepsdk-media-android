@@ -19,10 +19,11 @@ configure<com.diffplug.gradle.spotless.SpotlessExtension> {
     java {
         toggleOffOn("format:off", "format:on")
         target("src/*/java/**/*.java")
+        importOrder()
         removeUnusedImports()
-        prettier(mapOf("prettier" to "2.7.1", "prettier-plugin-java" to "1.6.2"))
-        .config(mapOf("parser" to "java", "tabWidth" to 4, "useTabs" to true, "printWidth" to 120))
+        googleJavaFormat(BuildConstants.Versions.GOOGLE_JAVA_FORMAT).aosp().reflowLongStrings()
         endWithNewline()
+        formatAnnotations()
         licenseHeader(BuildConstants.ADOBE_LICENSE_HEADER)
     }
 }

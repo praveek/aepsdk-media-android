@@ -18,56 +18,56 @@ import android.widget.VideoView;
 
 public class ObservableVideoView extends VideoView {
 
-	private static final String LOG_TAG = "[Sample]::ObservableVideoView";
+    private static final String LOG_TAG = "[Sample]::ObservableVideoView";
 
-	private VideoPlayer _player;
+    private VideoPlayer _player;
 
-	public ObservableVideoView(Context context) {
-		super(context);
-	}
+    public ObservableVideoView(Context context) {
+        super(context);
+    }
 
-	public ObservableVideoView(Context context, AttributeSet attrs) {
-		super(context, attrs);
-	}
+    public ObservableVideoView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+    }
 
-	public ObservableVideoView(Context context, AttributeSet attrs, int defStyle) {
-		super(context, attrs, defStyle);
-	}
+    public ObservableVideoView(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
+    }
 
-	public void setVideoPlayer(VideoPlayer player) {
-		_player = player;
-	}
+    public void setVideoPlayer(VideoPlayer player) {
+        _player = player;
+    }
 
-	@Override
-	public void start() {
-		super.start();
+    @Override
+    public void start() {
+        super.start();
 
-		Log.d(LOG_TAG, "Resuming playback.");
+        Log.d(LOG_TAG, "Resuming playback.");
 
-		if (_player != null) {
-			_player.resumePlayback();
-		}
-	}
+        if (_player != null) {
+            _player.resumePlayback();
+        }
+    }
 
-	@Override
-	public void pause() {
-		super.pause();
+    @Override
+    public void pause() {
+        super.pause();
 
-		Log.d(LOG_TAG, "Pausing playback.");
+        Log.d(LOG_TAG, "Pausing playback.");
 
-		if (_player != null) {
-			_player.pausePlayback();
-		}
-	}
+        if (_player != null) {
+            _player.pausePlayback();
+        }
+    }
 
-	@Override
-	public void seekTo(int msec) {
-		super.seekTo(msec);
+    @Override
+    public void seekTo(int msec) {
+        super.seekTo(msec);
 
-		Log.d(LOG_TAG, "Starting seek.");
+        Log.d(LOG_TAG, "Starting seek.");
 
-		if (_player != null) {
-			_player.seekStart();
-		}
-	}
+        if (_player != null) {
+            _player.seekStart();
+        }
+    }
 }

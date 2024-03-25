@@ -21,35 +21,34 @@ import com.adobe.marketing.mobile.Assurance;
 
 public class MainActivity extends AppCompatActivity {
 
-	Button startPlayerBtn;
-	EditText assuranceURL;
+    Button startPlayerBtn;
+    EditText assuranceURL;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
-		startPlayerBtn = findViewById(R.id.startVideoPlayer);
-		startPlayerBtn.setOnClickListener(
-			new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					startVideoPlayer();
-				}
-			}
-		);
-	}
+        startPlayerBtn = findViewById(R.id.startVideoPlayer);
+        startPlayerBtn.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        startVideoPlayer();
+                    }
+                });
+    }
 
-	//Add button for Assurance
-	public void setAssurance(View view) {
-		//include Assurance url here
-		assuranceURL = findViewById(R.id.assuranceUrl);
-		String url = assuranceURL.getText().toString();
-		Assurance.startSession(url);
-	}
+    // Add button for Assurance
+    public void setAssurance(View view) {
+        // include Assurance url here
+        assuranceURL = findViewById(R.id.assuranceUrl);
+        String url = assuranceURL.getText().toString();
+        Assurance.startSession(url);
+    }
 
-	public void startVideoPlayer() {
-		Intent intent = new Intent(this, MediaActivity.class);
-		startActivity(intent);
-	}
+    public void startVideoPlayer() {
+        Intent intent = new Intent(this, MediaActivity.class);
+        startActivity(intent);
+    }
 }
