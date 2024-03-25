@@ -16,8 +16,7 @@ TEST-APP-FOLDER-NAME = testapp
 init:
 	git config core.hooksPath .githooks
 
-clean:
-	(rm -rf $(AAR_FILE_DIR))
+clean:	
 	(./code/gradlew -p code clean)
 
 checkstyle: 
