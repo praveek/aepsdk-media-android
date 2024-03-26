@@ -247,7 +247,7 @@ class MediaOfflineService implements MediaHitProcessor {
                 Log.trace(
                         MediaInternalConstants.EXTENSION_LOG_TAG,
                         LOG_TAG,
-                        "reportCompletedSessions - Exiting as we are currently sending session"
+                        "reportCompletedSessions - Exiting as we are currently sending session."
                                 + " report.");
                 return false;
             }
@@ -300,7 +300,7 @@ class MediaOfflineService implements MediaHitProcessor {
                         MediaInternalConstants.EXTENSION_LOG_TAG,
                         LOG_TAG,
                         "reportCompletedSessions - Could not generate url for reporting downloaded"
-                                + " content report for session %s",
+                                + " content report for session %s.",
                         sessionID);
                 return false;
             }
