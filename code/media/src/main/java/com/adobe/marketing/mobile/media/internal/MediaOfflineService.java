@@ -341,8 +341,9 @@ class MediaOfflineService implements MediaHitProcessor {
                                     Log.debug(
                                             MediaInternalConstants.EXTENSION_LOG_TAG,
                                             LOG_TAG,
-                                            "ReportCompletedSessions - Http request error,"
-                                                    + " connection was null");
+                                            "ReportCompletedSessions - Failed to report session"
+                                                    + " because the connection is null (network is"
+                                                    + " offline)");
                                 } else {
                                     int respCode = connection.getResponseCode();
 
