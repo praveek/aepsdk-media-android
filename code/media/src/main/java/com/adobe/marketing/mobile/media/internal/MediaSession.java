@@ -218,7 +218,7 @@ class MediaSession {
                                             MediaInternalConstants.EXTENSION_LOG_TAG,
                                             LOG_TAG,
                                             "trySendHit - Failed to send the (%s) hit because the"
-                                                    + " connection is null (network is offline)",
+                                                    + " connection is null (network is offline).",
                                             hitEventType);
                                     deviceOffline = true;
                                     break;
@@ -230,7 +230,7 @@ class MediaSession {
                                     Log.debug(
                                             MediaInternalConstants.EXTENSION_LOG_TAG,
                                             LOG_TAG,
-                                            "trySendHit - (%s) Http failed with response code %d ",
+                                            "trySendHit - (%s) Http failed with response code %d.",
                                             hitEventType,
                                             respCode);
                                     break;
@@ -244,11 +244,11 @@ class MediaSession {
                                         connection.getResponsePropertyValue("Location");
 
                                 if (sessionResponseFragment == null) {
-                                    Log.trace(
+                                    Log.debug(
                                             MediaInternalConstants.EXTENSION_LOG_TAG,
                                             LOG_TAG,
                                             "trySendHit - (%s) Media collection endpoint returned"
-                                                    + " null location header",
+                                                    + " null location header.",
                                             hitEventType);
                                     break;
                                 }
@@ -259,7 +259,7 @@ class MediaSession {
                                         MediaInternalConstants.EXTENSION_LOG_TAG,
                                         LOG_TAG,
                                         "trySendHit - (%s) Media collection endpoint created"
-                                                + " internal session : %s",
+                                                + " internal session : %s.",
                                         hitEventType,
                                         mcSessionId);
 
@@ -274,7 +274,7 @@ class MediaSession {
                             Log.debug(
                                     MediaInternalConstants.EXTENSION_LOG_TAG,
                                     LOG_TAG,
-                                    "trySendHit - (%s) Finished http connection",
+                                    "trySendHit - (%s) Finished http connection.",
                                     hitEventType);
 
                             synchronized (mutex) {
@@ -302,6 +302,13 @@ class MediaSession {
 
                                 if (!shouldRetry) {
                                     removeHit();
+                                } else {
+                                    Log.debug(
+                                            MediaInternalConstants.EXTENSION_LOG_TAG,
+                                            LOG_TAG,
+                                            "trySendHit - Will attempt to retry sending %s hit"
+                                                    + " later.",
+                                            hitEventType);
                                 }
                             }
                         });
