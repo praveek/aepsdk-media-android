@@ -383,9 +383,7 @@ class MediaOfflineService implements MediaHitProcessor {
 
                                 isReportingSession = false;
                                 currentReportingSession = null;
-                            }
 
-                            if (connection != null) {
                                 connection.close();
                             }
 

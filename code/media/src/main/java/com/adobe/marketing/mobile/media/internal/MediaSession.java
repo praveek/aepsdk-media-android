@@ -281,7 +281,8 @@ class MediaSession {
                                 boolean shouldRetry = false;
 
                                 if (deviceOffline) {
-                                    // `trySendHit` verifies network connectivity before sending a
+                                    // `MediaReportHelper.isReadyToSendHit` verifies network
+                                    // connectivity before sending a
                                     // hit. If the network goes
                                     // offline after verification but before sending the hit, retry
                                     // the attempt regardless
