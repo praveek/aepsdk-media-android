@@ -535,7 +535,7 @@ public class MediaSessionTests {
         assertEquals(1, mediaSession.getQueueSize());
 
         // In case of network failure, sessionStart hits are retried 2 more times being dropped.
-        // When network service returns null connection (device offline), hits should should not be
+        // When network service returns null connection (device offline), hits should not be
         // dropped.
         for (int i = 0; i <= MediaSession.RETRY_COUNT + 1; ++i) {
             mockNetworkService.reset();
@@ -552,7 +552,7 @@ public class MediaSessionTests {
         assertEquals(0, mediaSession.getQueueSize());
 
         // In case of network failure, media hits other than session start are dropped.
-        // When network service returns null connection (device offline), the hit should should not
+        // When network service returns null connection (device offline), the hit should not
         // be dropped.
         mediaSession.queueHit(mockData.play);
 
