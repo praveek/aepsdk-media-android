@@ -347,6 +347,7 @@ class MediaOfflineService implements MediaHitProcessor {
                                             currentReportingSession);
                                 } else {
                                     int respCode = connection.getResponseCode();
+                                    connection.close();
 
                                     Log.debug(
                                             MediaInternalConstants.EXTENSION_LOG_TAG,
@@ -383,8 +384,6 @@ class MediaOfflineService implements MediaHitProcessor {
 
                                 isReportingSession = false;
                                 currentReportingSession = null;
-
-                                connection.close();
                             }
 
                             // Note :- If http request succeeds, we can try sending next available
